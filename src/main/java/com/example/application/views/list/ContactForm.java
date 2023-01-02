@@ -1,6 +1,5 @@
 package com.example.application.views.list;
 
-import com.example.application.data.entity.Company;
 import com.example.application.data.entity.Contact;
 import com.example.application.data.entity.Status;
 import com.vaadin.flow.component.ComponentEvent;
@@ -26,26 +25,22 @@ public class ContactForm extends FormLayout {
   TextField firstName = new TextField("First name");
   TextField lastName = new TextField("Last name");
   EmailField email = new EmailField("Email");
-  ComboBox<Status> status = new ComboBox<>("Status");
-  ComboBox<Company> company = new ComboBox<>("Company");
+  ComboBox<Status> status = new ComboBox<>("Subject");
   Binder<Contact> binder = new BeanValidationBinder<>(Contact.class);
 
   Button save = new Button("Save");
   Button delete = new Button("Delete");
   Button close = new Button("Cancel");
 
-  public ContactForm(List<Company> companies, List<Status> statuses) {
+  public ContactForm(List<Status> statuses) {
     addClassName("contact-form");
     binder.bindInstanceFields(this);
 
-    company.setItems(companies);
-    company.setItemLabelGenerator(Company::getName);
     status.setItems(statuses);
     status.setItemLabelGenerator(Status::getName);
     add(firstName,
         lastName,
         email,
-        company,
         status,
         createButtonsLayout()); 
   }

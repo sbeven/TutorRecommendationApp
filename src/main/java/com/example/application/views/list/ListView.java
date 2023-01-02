@@ -35,7 +35,7 @@ public class ListView extends VerticalLayout {
         setSizeFull();
         configureGrid();
 
-        form = new ContactForm(service.findAllCompanies(), service.findAllStatuses());
+        form = new ContactForm(service.findAllStatuses());
         form.setWidth("25em");
         form.addListener(ContactForm.SaveEvent.class, this::saveContact);
         form.addListener(ContactForm.DeleteEvent.class, this::deleteContact);
@@ -59,8 +59,7 @@ public class ListView extends VerticalLayout {
         grid.addClassNames("contact-grid");
         grid.setSizeFull();
         grid.setColumns("firstName", "lastName", "email");
-        grid.addColumn(contact -> contact.getStatus().getName()).setHeader("Status");
-        grid.addColumn(contact -> contact.getCompany().getName()).setHeader("Company");
+        grid.addColumn(contact -> contact.getStatus().getName()).setHeader("Subject");
         grid.getColumns().forEach(col -> col.setAutoWidth(true));
     }
 

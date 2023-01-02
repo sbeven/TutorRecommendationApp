@@ -18,11 +18,6 @@ public class Contact extends AbstractEntity {
     @NotEmpty
     private String lastName = "";
 
-    @ManyToOne
-    @JoinColumn(name = "company_id")
-    @NotNull
-    @JsonIgnoreProperties({"employees"})
-    private Company company;
 
     @NotNull
     @ManyToOne
@@ -51,14 +46,6 @@ public class Contact extends AbstractEntity {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
-    }
-
-    public Company getCompany() {
-        return company;
-    }
-
-    public void setCompany(Company company) {
-        this.company = company;
     }
 
     public Status getStatus() {

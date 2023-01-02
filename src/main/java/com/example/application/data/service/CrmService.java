@@ -1,9 +1,7 @@
 package com.example.application.data.service;
 
-import com.example.application.data.entity.Company;
 import com.example.application.data.entity.Contact;
 import com.example.application.data.entity.Status;
-import com.example.application.data.repository.CompanyRepository;
 import com.example.application.data.repository.ContactRepository;
 import com.example.application.data.repository.StatusRepository;
 import org.springframework.stereotype.Service;
@@ -14,14 +12,11 @@ import java.util.List;
 public class CrmService {
 
     private final ContactRepository contactRepository;
-    private final CompanyRepository companyRepository;
     private final StatusRepository statusRepository;
 
     public CrmService(ContactRepository contactRepository,
-                      CompanyRepository companyRepository,
                       StatusRepository statusRepository) {
         this.contactRepository = contactRepository;
-        this.companyRepository = companyRepository;
         this.statusRepository = statusRepository;
     }
 
@@ -49,9 +44,6 @@ public class CrmService {
         contactRepository.save(contact);
     }
 
-    public List<Company> findAllCompanies() {
-        return companyRepository.findAll();
-    }
 
     public List<Status> findAllStatuses(){
         return statusRepository.findAll();
