@@ -1,9 +1,12 @@
 package com.example.application.views;
 
+import com.vaadin.flow.component.applayout.DrawerToggle;
+import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.component.html.H1;
 import com.vaadin.flow.component.html.Image;
 import com.vaadin.flow.component.login.LoginForm;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
+import com.vaadin.flow.component.tabs.Tabs;
 import com.vaadin.flow.router.BeforeEnterEvent;
 import com.vaadin.flow.router.BeforeEnterObserver;
 import com.vaadin.flow.router.PageTitle;
@@ -11,6 +14,7 @@ import com.vaadin.flow.router.Route;
 
 @Route("login")
 @PageTitle("Login | Tutor Recommendation App")
+@CssImport("./themes/flowcrmtutorial/styles.css")
 public class LoginView extends VerticalLayout implements BeforeEnterObserver {
 
 	private final LoginForm login = new LoginForm();
@@ -18,10 +22,6 @@ public class LoginView extends VerticalLayout implements BeforeEnterObserver {
 	public LoginView(){
 
 		addClassName("login-view");
-		Image image = new Image("images/prepbooks.jpeg", "Prep Books");
-		image.setHeight("50%");
-		image.setWidth("25%");
-		add(image);
 
 		setSizeFull();
 		setAlignItems(Alignment.CENTER);
@@ -29,11 +29,8 @@ public class LoginView extends VerticalLayout implements BeforeEnterObserver {
 
 		login.setAction("login");
 
-		VerticalLayout header = new VerticalLayout();
-		header.add(new H1("Tutor Recommendation App"));
-		header.setAlignItems(Alignment.CENTER);
+		add(login);
 
-		add(header, login);
 	}
 
 	@Override

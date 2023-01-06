@@ -4,4 +4,13 @@
 a[highlight] {
     font-weight: bold;
     text-decoration: underline;
+
 }
+ .login-view {
+   background-image: url("images/prepbooks.jpg");
+   background-repeat: no-repeat;
+   background-size: 1300px auto;
+   background-position: right
+
+
+  }
