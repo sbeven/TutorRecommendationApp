@@ -7,10 +7,9 @@ a[highlight] {
 
 }
  .login-view {
-   background-image: url("images/prepbooks.jpg");
+
+   background-image: url("images/books.jpg");
    background-repeat: no-repeat;
-   background-size: 1300px auto;
-   background-position: right
+   background-position: center
+ }
 
-
-  }
