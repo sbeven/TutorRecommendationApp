@@ -22,10 +22,11 @@ import com.vaadin.flow.router.Route;
 import com.vaadin.flow.router.RouterLink;
 
 import javax.annotation.security.PermitAll;
+import javax.annotation.security.RolesAllowed;
 
 @Route(value = "Sessions", layout = MainLayout.class)
 @PageTitle("Sessions|Tutor Recommendation App")
-@PermitAll
+@RolesAllowed("TUTOR")
 public class SessionView extends Div {
     private final CrmService service;
     private final SecurityService securityService;

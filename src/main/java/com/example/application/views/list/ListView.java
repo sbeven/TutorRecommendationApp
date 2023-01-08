@@ -12,17 +12,19 @@ import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.value.ValueChangeMode;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
+import org.springframework.context.annotation.Role;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.security.PermitAll;
+import javax.annotation.security.RolesAllowed;
 
 
-@Component
-@Scope("prototype")
-@Route(value="", layout = MainLayout.class)
+
+
+@Route(value="Tutors", layout = MainLayout.class)
 @PageTitle("Contacts | Tutor Recommendation App")
-@PermitAll
+@RolesAllowed("STUDENT")
 public class ListView extends VerticalLayout {
     Grid<Contact> grid = new Grid<>(Contact.class);
     TextField filterText = new TextField();

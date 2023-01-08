@@ -1,7 +1,7 @@
 package com.example.application.security;
 
 import java.util.Collections;
-
+import org.springframework.security.core.userdetails.UserDetailsService;
 import com.example.application.views.LoginView;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -19,9 +19,12 @@ public class SecurityConfig extends VaadinWebSecurity {
 
   private static class CrmInMemoryUserDetailsManager extends InMemoryUserDetailsManager {
     public CrmInMemoryUserDetailsManager() {
-      createUser(new User("user",
-              "{noop}userpass",
-              Collections.singleton(new SimpleGrantedAuthority("ROLE_USER"))));
+      createUser(new User("t",
+              "{noop}t",
+              Collections.singleton(new SimpleGrantedAuthority("ROLE_TUTOR"))));
+      createUser(new User("s",
+              "{noop}s",
+              Collections.singleton(new SimpleGrantedAuthority("ROLE_STUDENT"))));
     }
   }
 
@@ -36,7 +39,16 @@ public class SecurityConfig extends VaadinWebSecurity {
   }
 
   @Bean
-  public InMemoryUserDetailsManager userDetailsService() {
-    return new CrmInMemoryUserDetailsManager();
+  public UserDetailsService userDetailsServiceBean() throws Exception {
+    return new InMemoryUserDetailsManager(
+            User.withUsername("t")
+                    .password("{noop}t")
+                    .roles("TUTOR")
+                    .build(),
+            User.withUsername("s")
+                    .password("{noop}s")
+                    .roles("STUDENT")
+                    .build()
+    );
   }
 }

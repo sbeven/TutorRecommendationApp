@@ -1,5 +1,6 @@
 package com.example.application.views;
 
+import com.example.application.views.list.ListView;
 import com.vaadin.flow.component.Composite;
 import com.vaadin.flow.component.applayout.DrawerToggle;
 import com.vaadin.flow.component.dependency.CssImport;
@@ -10,14 +11,13 @@ import com.vaadin.flow.component.login.LoginForm;
 import com.vaadin.flow.component.login.LoginOverlay;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.tabs.Tabs;
-import com.vaadin.flow.router.BeforeEnterEvent;
-import com.vaadin.flow.router.BeforeEnterObserver;
-import com.vaadin.flow.router.PageTitle;
-import com.vaadin.flow.router.Route;
+import com.vaadin.flow.router.*;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 
 @Route("login")
 @PageTitle("Login | Sample App")
-public class LoginView extends VerticalLayout implements BeforeEnterObserver {
+public class LoginView extends VerticalLayout implements BeforeEnterObserver, BeforeLeaveObserver {
 
 	private final LoginOverlay login = new LoginOverlay();
 
@@ -26,8 +26,8 @@ public class LoginView extends VerticalLayout implements BeforeEnterObserver {
 		addClassName("login-view");
 		LoginOverlay loginOverlay = new LoginOverlay();
 		loginOverlay.setTitle("Tutor Recommendation App");
-		loginOverlay.setDescription("Created by Scott Chen and Steven Zhang \n Login with username" +
-				" 'user' and password 'userpass.'");
+		loginOverlay.setDescription("Created by Scott Chen and Steven Zhang \n Tutor Username: t Password: t" +
+				" \n Student Username: s Password: s");
 		loginOverlay.setOpened(true);
 		loginOverlay.setAction("login");
 		add(loginOverlay);
@@ -43,5 +43,10 @@ public class LoginView extends VerticalLayout implements BeforeEnterObserver {
 				.containsKey("error")) {
 			login.setError(true);
 		}
+	}
+
+	@Override
+	public void beforeLeave(BeforeLeaveEvent beforeLeaveEvent) {
+		System.out.println("leaving login");
 	}
 }

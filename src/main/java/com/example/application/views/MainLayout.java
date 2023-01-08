@@ -18,7 +18,7 @@ public class MainLayout extends AppLayout {
     public MainLayout(SecurityService securityService) {
         this.securityService = securityService;
         createHeader();
-        createDrawer();
+        /*createDrawer();*/
     }
 
     private void createHeader() {
@@ -43,8 +43,7 @@ public class MainLayout extends AppLayout {
         listLink.setHighlightCondition(HighlightConditions.sameLocation());
 
         addToDrawer(new VerticalLayout(
-                listLink,
-                new RouterLink("Sessions", SessionView.class)
+                listLink
         ));
     }
 }
