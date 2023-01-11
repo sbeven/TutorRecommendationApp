@@ -1,6 +1,7 @@
 package com.example.application.views;
 
 import com.example.application.data.service.CrmService;
+import com.example.application.security.SecurityConfig;
 import com.example.application.security.SecurityService;
 import com.example.application.views.list.ListView;
 import com.vaadin.flow.component.Component;
@@ -26,10 +27,14 @@ import javax.annotation.security.RolesAllowed;
 @AnonymousAllowed
 public class StarterView extends VerticalLayout implements BeforeEnterObserver {
     public StarterView() {
-        add(new H1("Welcome!"));
+        H1 a = new H1("Welcome!");
+        add(a);
         Button button = new Button("Login");
         button.addClickListener(e -> button.getUI().ifPresent(ui -> ui.navigate("login")));
         add(button);
+        Button signup = new Button("Sign up");
+        signup.addClickListener(e -> signup.getUI().ifPresent(ui -> ui.navigate("register")));
+        add(signup);
     }
 
     @Override

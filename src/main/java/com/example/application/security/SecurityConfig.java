@@ -17,6 +17,16 @@ import com.vaadin.flow.spring.security.VaadinWebSecurity;
 @Configuration
 public class SecurityConfig extends VaadinWebSecurity {
 
+  public static InMemoryUserDetailsManager userdetails = new InMemoryUserDetailsManager(
+          User.withUsername("t")
+                  .password("{noop}t")
+                  .roles("TUTOR")
+                  .build(),
+          User.withUsername("s")
+                  .password("{noop}s")
+                  .roles("STUDENT")
+                  .build()
+  );
   private static class CrmInMemoryUserDetailsManager extends InMemoryUserDetailsManager {
     public CrmInMemoryUserDetailsManager() {
       createUser(new User("t",
@@ -40,15 +50,12 @@ public class SecurityConfig extends VaadinWebSecurity {
 
   @Bean
   public UserDetailsService userDetailsServiceBean() throws Exception {
-    return new InMemoryUserDetailsManager(
-            User.withUsername("t")
-                    .password("{noop}t")
-                    .roles("TUTOR")
-                    .build(),
-            User.withUsername("s")
-                    .password("{noop}s")
-                    .roles("STUDENT")
-                    .build()
-    );
+    return userdetails;
+  }
+  public static void addUser(String name, String pass, String role) {
+    System.out.println("added user " + name);
+    userdetails.createUser(new User(name,
+            "{noop}" + pass,
+            Collections.singleton(new SimpleGrantedAuthority("ROLE_" + role.toUpperCase()))));
   }
 }
