@@ -1,6 +1,7 @@
-package com.example.application.views;
+package com.example.application.views.TutorView;
 
 import com.example.application.security.SecurityService;
+import com.example.application.views.StudentView.StudentSessionView;
 import com.example.application.views.list.ListView;
 import com.vaadin.flow.component.applayout.AppLayout;
 import com.vaadin.flow.component.applayout.DrawerToggle;
@@ -10,19 +11,24 @@ import com.vaadin.flow.component.orderedlayout.FlexComponent;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.HighlightConditions;
+import com.vaadin.flow.router.Route;
 import com.vaadin.flow.router.RouterLink;
 
-public class MainLayout extends AppLayout {
+import javax.annotation.security.RolesAllowed;
+
+@RolesAllowed("TUTOR")
+@Route("TutorMain")
+public class TutorMainLayout extends AppLayout {
     private final SecurityService securityService;
 
-    public MainLayout(SecurityService securityService) {
+    public TutorMainLayout(SecurityService securityService) {
         this.securityService = securityService;
         createHeader();
-        /*createDrawer();*/
+        createDrawer();
     }
 
     private void createHeader() {
-        H1 logo = new H1("Tutor Recommendation App");
+        H1 logo = new H1("Tutor Recommendation App (Tutor View)");
         logo.addClassNames("text-l", "m-m");
 
         Button logout = new Button("Log out", e -> securityService.logout());
@@ -39,11 +45,9 @@ public class MainLayout extends AppLayout {
     }
 
     private void createDrawer() {
-        RouterLink listLink = new RouterLink("Tutor List", ListView.class);
+        RouterLink listLink = new RouterLink("Sessions", TutorSessionView.class);
         listLink.setHighlightCondition(HighlightConditions.sameLocation());
 
-        addToDrawer(new VerticalLayout(
-                listLink
-        ));
+        addToDrawer(new VerticalLayout(listLink));
     }
 }

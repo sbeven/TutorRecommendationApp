@@ -8,16 +8,18 @@ import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.H1;
 import com.vaadin.flow.component.html.Image;
 import com.vaadin.flow.component.login.LoginForm;
+import com.vaadin.flow.component.login.LoginI18n;
 import com.vaadin.flow.component.login.LoginOverlay;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.tabs.Tabs;
 import com.vaadin.flow.router.*;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.vaadin.firitin.util.WebStorage;
 
 @Route("login")
 @PageTitle("Login | Sample App")
-public class LoginView extends VerticalLayout implements BeforeEnterObserver, BeforeLeaveObserver {
+public class LoginView extends Div implements BeforeEnterObserver, BeforeLeaveObserver {
 
 	private final LoginOverlay login = new LoginOverlay();
 
@@ -25,10 +27,12 @@ public class LoginView extends VerticalLayout implements BeforeEnterObserver, Be
 
 		addClassName("login-view");
 		LoginOverlay loginOverlay = new LoginOverlay();
-		loginOverlay.setTitle("Tutor Recommendation App");
-		loginOverlay.setDescription("Created by Scott Chen and Steven Zhang \n Tutor Username: t Password: t" +
-				" \n Student Username: s Password: s");
+		loginOverlay.setTitle("Tutor Management System");
+		loginOverlay.setDescription("Created by Scott Chen and Steven Zhang \n Tutor Username: t Password: t. " +
+				"Student Username: s Password: s");
+		loginOverlay.setForgotPasswordButtonVisible(false);
 		loginOverlay.setOpened(true);
+
 		loginOverlay.setAction("login");
 		add(loginOverlay);
 
@@ -41,7 +45,7 @@ public class LoginView extends VerticalLayout implements BeforeEnterObserver, Be
 				.getQueryParameters()
 				.getParameters()
 				.containsKey("error")) {
-			login.setError(true);
+			login.setError(false);
 		}
 	}
 

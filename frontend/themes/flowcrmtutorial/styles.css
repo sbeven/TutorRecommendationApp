@@ -6,10 +6,9 @@ a[highlight] {
     text-decoration: underline;
 
 }
- .login-view {
 
-   background-image: url("images/books.jpg");
-   background-repeat: no-repeat;
-   background-position: center
- }
+.login-view vaadin-login-overlay-wrapper::part(backdrop) {
+  background: url("images/prepbooks.jpg");
+  background-size: cover;
+}
 

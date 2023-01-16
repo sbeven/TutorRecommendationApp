@@ -1,6 +1,8 @@
 package com.example.application.security;
 
 import java.util.Collections;
+
+import com.vaadin.flow.component.notification.Notification;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import com.example.application.views.LoginView;
 import org.springframework.context.annotation.Bean;
@@ -17,7 +19,7 @@ import com.vaadin.flow.spring.security.VaadinWebSecurity;
 @Configuration
 public class SecurityConfig extends VaadinWebSecurity {
 
-  public static InMemoryUserDetailsManager userdetails = new InMemoryUserDetailsManager(
+  public static InMemoryUserDetailsManager userDetails = new InMemoryUserDetailsManager(
           User.withUsername("t")
                   .password("{noop}t")
                   .roles("TUTOR")
@@ -50,12 +52,12 @@ public class SecurityConfig extends VaadinWebSecurity {
 
   @Bean
   public UserDetailsService userDetailsServiceBean() throws Exception {
-    return userdetails;
+    return userDetails;
   }
   public static void addUser(String name, String pass, String role) {
-    System.out.println("added user " + name);
-    userdetails.createUser(new User(name,
+    userDetails.createUser(new User(name,
             "{noop}" + pass,
             Collections.singleton(new SimpleGrantedAuthority("ROLE_" + role.toUpperCase()))));
+    Notification.show("Sign up successful!");
   }
 }
