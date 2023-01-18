@@ -1,9 +1,8 @@
 package com.example.application.views;
 
 import com.example.application.views.StudentView.StudentMainLayout;
-import com.example.application.views.StudentView.StudentSessionView;
 import com.example.application.views.TutorView.TutorMainLayout;
-import com.example.application.views.list.ListView;
+
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.html.H1;
 import org.springframework.security.core.Authentication;

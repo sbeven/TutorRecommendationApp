@@ -74,10 +74,12 @@ public class ListView extends VerticalLayout {
         return toolbar;
     }
 
-    private void saveContact(ContactForm.SaveEvent event) {
-        service.saveContact(event.getContact());
-        updateList();
-        closeEditor();
+   private void saveContact(ContactForm.SaveEvent event) {//modified
+            service.saveContact(event.getContact());
+//            ContactForm.contactList.add(event.getContact().getFirstName() + " " + event.getContact().getLastName());
+//            System.out.println(ContactForm.contactList);
+            updateList();
+            closeEditor();
     }
 
     private void deleteContact(ContactForm.DeleteEvent event) {

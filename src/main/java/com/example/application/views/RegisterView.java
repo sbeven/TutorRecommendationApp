@@ -30,7 +30,7 @@ public class RegisterView extends VerticalLayout {
 	private Button signup = new Button("Sign up");
 	private Button back = new Button("Cancel");
 
-	public static HashMap<String, String> userAndRoles = new HashMap<String, String>();
+
 	public RegisterView() {
 		roles.setItems(new String[]{"Student", "Tutor"});
 		signup.addClickListener(
@@ -51,7 +51,6 @@ public class RegisterView extends VerticalLayout {
 			navigation.navigate("register");
 		} else {
 			SecurityConfig.addUser(user, pass, role);
-			userAndRoles.put(user, role);
 			navigation.navigate("login");
 		}
 	}

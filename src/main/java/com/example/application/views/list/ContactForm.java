@@ -17,11 +17,13 @@ import com.vaadin.flow.data.binder.Binder;
 import com.vaadin.flow.data.binder.ValidationException;
 import com.vaadin.flow.shared.Registration;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class ContactForm extends FormLayout {
   private Contact contact;
-
+  //public static ArrayList<String> contactList= new ArrayList<String>();
   TextField firstName = new TextField("First name");
   TextField lastName = new TextField("Last name");
   EmailField email = new EmailField("Email");
