@@ -30,10 +30,8 @@ public class StarterView extends VerticalLayout implements BeforeEnterObserver {
     public void beforeEnter(BeforeEnterEvent beforeEnterEvent) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         if (auth != null && auth.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("ROLE_TUTOR"))) {
-            //System.out.println("go to session");
             beforeEnterEvent.forwardTo(TutorMainLayout.class);
         } else if (auth != null && auth.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("ROLE_STUDENT"))) {
-            //System.out.println("go to list");
             beforeEnterEvent.forwardTo(StudentMainLayout.class);
         }
     }

@@ -52,20 +52,21 @@ public class StudentSessionView extends Div {
     Select<String> select = new Select<>();
 
     public StudentSessionView() {
+
         all = new Tab("All");
         upcoming = new Tab("Upcoming");
         completed = new Tab("Completed");
         cancelled = new Tab("Cancelled");
         Tabs tabs = new Tabs(all, upcoming, completed, cancelled);
         tabs.addSelectedChangeListener(
-                event -> setContent(upcoming));//necessary code
+                event -> setContent());//necessary code
         tabs.addThemeVariants(TabsVariant.LUMO_CENTERED);
         content = new VerticalLayout();
 
         generateSessionForm.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
         select.setItems("Eula Lane", "Barry Rodriquez");
 
-        setContent(upcoming);
+        setContent();
 
         class sessionListener
                 implements ComponentEventListener<ClickEvent<Button>> {
@@ -104,7 +105,7 @@ public class StudentSessionView extends Div {
         add(generateSessionForm, tabs, content);
     }
 
-    private void setContent(Tab tab) {
+    private void setContent() {
 
         //content.removeAll();
 
@@ -112,8 +113,7 @@ public class StudentSessionView extends Div {
                 implements ComponentEventListener<ClickEvent<Button>> {
             @Override
             public void onComponentEvent(ClickEvent<Button> event) {
-
-               content.add(createForm());
+             content.add(createForm());
 
             }
 

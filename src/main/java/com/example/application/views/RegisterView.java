@@ -1,28 +1,19 @@
 package com.example.application.views;
 
-import com.example.application.data.entity.Contact;
 import com.example.application.data.entity.Status;
 import com.example.application.data.service.CrmService;
 import com.example.application.security.SecurityConfig;
-import com.example.application.views.list.ContactForm;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.combobox.ComboBox;
+import com.vaadin.flow.component.combobox.MultiSelectComboBox;
 import com.vaadin.flow.component.formlayout.FormLayout;
-import com.vaadin.flow.component.login.LoginOverlay;
 import com.vaadin.flow.component.notification.Notification;
-import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.EmailField;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.router.*;
 import com.vaadin.flow.server.auth.AnonymousAllowed;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.vaadin.firitin.util.WebStorage;
-
-
-import java.util.HashMap;
-import java.util.TreeMap;
 
 @Route("register")
 @PageTitle("Register | Sample App")
@@ -34,11 +25,11 @@ public class RegisterView extends VerticalLayout {
 	private TextField password = new TextField("Password");
 	private EmailField email = new EmailField("Email");
 	private ComboBox<String> roles = new ComboBox<>("Sign up as");
-	private ComboBox<Status> subject = new ComboBox<>("Subject (if tutor)");
+	private MultiSelectComboBox<Status> subject = new MultiSelectComboBox<>("Subjects (if tutor)");
 	private Button signup = new Button("Sign up");
 	private Button back = new Button("Cancel");
 	private CrmService service;
-	public static HashMap<String, String> userAndRoles = new HashMap<String, String>();
+
 	public RegisterView(CrmService service) {
 		this.service = service;
 		subject.setItems(service.findAllStatuses());
@@ -60,20 +51,19 @@ public class RegisterView extends VerticalLayout {
 		String f = first.getValue();
 		String l = last.getValue();
 		String e = email.getValue();
-		Status s = subject.getValue();
+		Status s = (Status) subject.getValue();
 
 		if(pass.trim().isEmpty()){
-			Notification.show("You must fill in all three fields");
+			Notification.show("You must fill in all necessary fields");
 			navigation.navigate("register");
 		} else if (role == "Tutor") {
 			SecurityConfig.addUser(user, pass, role);
-			Contact c = new Contact();
-			c.setFirstName(f);
-			c.setLastName(l);
-			c.setEmail(e);
-			c.setStatus(s);
-			service.saveContact(c);
-			userAndRoles.put(user, role);
+//			Contact c = new Contact();
+//			c.setFirstName(f);
+//			c.setLastName(l);
+//			c.setEmail(e);
+//			c.setStatus(s);
+//			service.saveContact(c);
 			navigation.navigate("login");
 		} else {
 			SecurityConfig.addUser(user, pass, role);

@@ -46,8 +46,6 @@ public class TutorSessionView extends Div {
 
         logo.addClassNames("text-l", "m-m");
 
-        //Button logout = new Button("Log out", e -> securityService.logout());
-
         HorizontalLayout header = new HorizontalLayout(logo);
 
         Tabs tabs = getTabs();
