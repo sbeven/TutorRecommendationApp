@@ -59,22 +59,32 @@ public class RegisterView extends VerticalLayout {
 		for (String str : set) {
 			s += str + ", ";
 		}
-		s = s.substring(0, s.length() - 2);
+		if (!s.isEmpty()) {
+			s = s.substring(0, s.length() - 2);
+		}
 		if(pass.trim().isEmpty() || user.trim().isEmpty()){
 			Notification.show("You must fill in all necessary fields");
 			navigation.navigate("register");
 		} else if (role == "Tutor") {
-			SecurityConfig.addUser(user, pass, role);
-			Contact c = new Contact();
-			c.setFirstName(f);
-			c.setLastName(l);
-			c.setEmail(e);
-			c.setSubjects(s);
-			service.saveContact(c);
-			navigation.navigate("login");
+			try {
+				SecurityConfig.addUser(user, pass, role);
+				Contact c = new Contact();
+				c.setFirstName(f);
+				c.setLastName(l);
+				c.setEmail(e);
+				c.setSubjects(s);
+				service.saveContact(c);
+				navigation.navigate("login");
+			} catch (Exception exc){
+				Notification.show("Error signing up. User might already be in the system.");
+			}
 		} else {
-			SecurityConfig.addUser(user, pass, role);
-			navigation.navigate("login");
+			try {
+				SecurityConfig.addUser(user, pass, role);
+				navigation.navigate("login");
+			} catch (Exception exc){
+				Notification.show("Error signing up. User might already be in the system.");
+			}
 		}
 	}
 }
