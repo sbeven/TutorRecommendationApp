@@ -48,15 +48,14 @@ public class ListView extends VerticalLayout {
         add(getToolbar(), content);
         updateList();
         closeEditor();
-        grid.asSingleSelect().addValueChangeListener(event ->
-            editContact(event.getValue()));
+        //grid.asSingleSelect().addValueChangeListener(event ->
+        //    editContact(event.getValue()));
     }
 
     private void configureGrid() {
         grid.addClassNames("contact-grid");
         grid.setSizeFull();
-        grid.setColumns("firstName", "lastName", "email");
-        grid.addColumn(contact -> contact.getStatus().getName()).setHeader("Subject");
+        grid.setColumns("firstName", "lastName", "email", "subjects");
         grid.getColumns().forEach(col -> col.setAutoWidth(true));
     }
 
@@ -68,7 +67,7 @@ public class ListView extends VerticalLayout {
 
         Button addContactButton = new Button("Add contact");
         addContactButton.addClickListener(click -> addContact());
-
+        //changed to remove add contact button
         HorizontalLayout toolbar = new HorizontalLayout(filterText);
         toolbar.addClassName("toolbar");
         return toolbar;

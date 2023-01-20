@@ -2,6 +2,9 @@ package com.example.application.views;
 
 import com.example.application.data.entity.Status;
 import com.example.application.data.entity.Contact;
+import java.util.HashSet;
+import java.util.Set;
+
 import com.example.application.data.service.CrmService;
 import com.example.application.security.SecurityConfig;
 import com.vaadin.flow.component.UI;
@@ -26,15 +29,14 @@ public class RegisterView extends VerticalLayout {
 	private TextField password = new TextField("Password");
 	private EmailField email = new EmailField("Email");
 	private ComboBox<String> roles = new ComboBox<>("Sign up as");
-	private MultiSelectComboBox<Status> subject = new MultiSelectComboBox<>("Subjects (if tutor)");
+	private MultiSelectComboBox<String> subject = new MultiSelectComboBox<>("Subjects (if tutor)");
 	private Button signup = new Button("Sign up");
 	private Button back = new Button("Cancel");
 	private CrmService service;
 
 	public RegisterView(CrmService service) {
 		this.service = service;
-		subject.setItems(service.findAllStatuses());
-		subject.setItemLabelGenerator(Status::getName);
+		subject.setItems(new String[]{"English", "Math", "Social Studies", "Science", "Art", "Music"});
 		roles.setItems(new String[]{"Student", "Tutor"});
 		signup.addClickListener(
 				e -> signup.getUI().ifPresent(ui -> signUp(ui)));
@@ -52,8 +54,12 @@ public class RegisterView extends VerticalLayout {
 		String f = first.getValue();
 		String l = last.getValue();
 		String e = email.getValue();
-		Status s = subject.getValue();
-
+		Set<String> set = subject.getValue();
+		String s = "";
+		for (String str : set) {
+			s += str + ", ";
+		}
+		s = s.substring(0, s.length() - 2);
 		if(pass.trim().isEmpty() || user.trim().isEmpty()){
 			Notification.show("You must fill in all necessary fields");
 			navigation.navigate("register");
@@ -63,7 +69,7 @@ public class RegisterView extends VerticalLayout {
 			c.setFirstName(f);
 			c.setLastName(l);
 			c.setEmail(e);
-			c.setStatus(s);
+			c.setSubjects(s);
 			service.saveContact(c);
 			navigation.navigate("login");
 		} else {

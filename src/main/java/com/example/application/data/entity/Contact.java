@@ -19,9 +19,8 @@ public class Contact extends AbstractEntity {
     private String lastName = "";
 
 
-    @NotNull
-    @ManyToOne
-    private Status status;
+    @NotEmpty
+    private String subjects = "";
 
     @Email
     @NotEmpty
@@ -48,12 +47,12 @@ public class Contact extends AbstractEntity {
         this.lastName = lastName;
     }
 
-    public Status getStatus() {
-        return status;
+    public String getSubjects() {
+        return subjects;
     }
 
-    public void setStatus(Status status) {
-        this.status = status;
+    public void setSubjects(String subjects) {
+        this.subjects = subjects;
     }
 
     public String getEmail() {
