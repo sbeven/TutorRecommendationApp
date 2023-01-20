@@ -65,7 +65,7 @@ public class RegisterView extends VerticalLayout {
 		if(pass.trim().isEmpty()){
 			Notification.show("You must fill in all three fields");
 			navigation.navigate("register");
-		} else {
+		} else if (role == "Tutor") {
 			SecurityConfig.addUser(user, pass, role);
 			Contact c = new Contact();
 			c.setFirstName(f);
@@ -73,6 +73,10 @@ public class RegisterView extends VerticalLayout {
 			c.setEmail(e);
 			c.setStatus(s);
 			service.saveContact(c);
+			userAndRoles.put(user, role);
+			navigation.navigate("login");
+		} else {
+			SecurityConfig.addUser(user, pass, role);
 			userAndRoles.put(user, role);
 			navigation.navigate("login");
 		}
