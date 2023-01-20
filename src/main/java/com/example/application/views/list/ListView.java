@@ -69,7 +69,7 @@ public class ListView extends VerticalLayout {
         Button addContactButton = new Button("Add contact");
         addContactButton.addClickListener(click -> addContact());
 
-        HorizontalLayout toolbar = new HorizontalLayout(filterText, addContactButton);
+        HorizontalLayout toolbar = new HorizontalLayout(filterText);
         toolbar.addClassName("toolbar");
         return toolbar;
     }

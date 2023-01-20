@@ -1,6 +1,7 @@
 package com.example.application.views;
 
 import com.example.application.data.entity.Status;
+import com.example.application.data.entity.Contact;
 import com.example.application.data.service.CrmService;
 import com.example.application.security.SecurityConfig;
 import com.vaadin.flow.component.UI;
@@ -51,23 +52,22 @@ public class RegisterView extends VerticalLayout {
 		String f = first.getValue();
 		String l = last.getValue();
 		String e = email.getValue();
-		Status s = (Status) subject.getValue();
+		Status s = subject.getValue();
 
-		if(pass.trim().isEmpty()){
+		if(pass.trim().isEmpty() || user.trim().isEmpty()){
 			Notification.show("You must fill in all necessary fields");
 			navigation.navigate("register");
 		} else if (role == "Tutor") {
 			SecurityConfig.addUser(user, pass, role);
-//			Contact c = new Contact();
-//			c.setFirstName(f);
-//			c.setLastName(l);
-//			c.setEmail(e);
-//			c.setStatus(s);
-//			service.saveContact(c);
+			Contact c = new Contact();
+			c.setFirstName(f);
+			c.setLastName(l);
+			c.setEmail(e);
+			c.setStatus(s);
+			service.saveContact(c);
 			navigation.navigate("login");
 		} else {
 			SecurityConfig.addUser(user, pass, role);
-			userAndRoles.put(user, role);
 			navigation.navigate("login");
 		}
 	}
